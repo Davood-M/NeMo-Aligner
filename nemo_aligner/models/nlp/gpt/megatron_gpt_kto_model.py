@@ -203,12 +203,7 @@ class MegatronGPTKTOModel(NLPAdapterModelMixin, MegatronGPTModel, SupervisedInte
 
                 return (
                     loss,
-                    {
-                        "avg": reduced_loss,
-                        "kl": kl_div,
-                        "out_chosen": out_chosen,
-                        "out_rejected": out_rejected,
-                    },
+                    {"avg": reduced_loss, "kl": kl_div, "out_chosen": out_chosen, "out_rejected": out_rejected,},
                 )
 
             if logprobs_only:

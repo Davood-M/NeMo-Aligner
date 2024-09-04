@@ -119,7 +119,6 @@ class KTOTrainer(DPOTrainer):
             run_timer,
         )
 
-
     def augment_dataloader(self, dataloader):
         """Augment dataloader with ref policy log prob"""
         iter_dataloader = iter(dataloader)
@@ -135,4 +134,3 @@ class KTOTrainer(DPOTrainer):
                 del logprobs, samples_logps, kl_samples_logps
             except StopIteration:
                 break
-

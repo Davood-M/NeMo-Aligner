@@ -297,11 +297,15 @@ class MegatronGPTDPOModel(NLPAdapterModelMixin, MegatronGPTModel, SupervisedInte
             loss = (
                 (
                     1.0
-                    - torch.nn.functional.sigmoid(self.ref_policy_kl_penalty * (chosen_rewards - reject_kl.clamp(min=0)))
+                    - torch.nn.functional.sigmoid(
+                        self.ref_policy_kl_penalty * (chosen_rewards - reject_kl.clamp(min=0))
+                    )
                 ).sum()
                 + (
                     1.0
-                    - torch.nn.functional.sigmoid(self.ref_policy_kl_penalty * (chosen_kl.clamp(min=0) - reject_rewards))
+                    - torch.nn.functional.sigmoid(
+                        self.ref_policy_kl_penalty * (chosen_kl.clamp(min=0) - reject_rewards)
+                    )
                 ).sum()
             ) / (chosen_rewards.numel() + reject_rewards.numel())
 
