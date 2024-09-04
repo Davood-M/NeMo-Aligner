@@ -136,27 +136,3 @@ class KTOTrainer(DPOTrainer):
             except StopIteration:
                 break
 
-    # def augment_dataloader_old(self, dataloader):
-    #     """Augment dataloader with ref policy log prob"""
-    #     iter_dataloader = iter(dataloader)
-    #     buffer = []
-    #     done = False
-    #     while not done:
-    #         try:
-    #             batch = next(iter_dataloader)
-    #         except StopIteration:
-    #             done = True
-    #         else:
-    #             buffer.append(batch)
-    #         if (done and buffer) or len(buffer) == 1:
-    #             logprobs = self.model.get_ref_policy_logprobs(buffer).cpu()
-    #             start = 0
-    #             for batch in buffer:
-    #                 batch_size = len(batch["samples"])
-    #                 assert len(batch["kl_samples"]) == batch_size
-    #                 for key in ("samples", "kl_samples"):
-    #                     batch[f"ref_policy_log_probs_{key}"] = logprobs[start : start + batch_size]
-    #                     start += batch_size
-    #                 yield batch
-    #             buffer.clear()
-    #             del logprobs
